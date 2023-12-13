@@ -11,7 +11,7 @@ PROCESSOR = $(ECHO) ocrd-vandalize
 CLIPARAMS = -I DEFAULT -O VANDALIZED
 
 # Clone the workspace and download only the `DEFAULT` fileGrp
-$(WS) clone:
+$(WS)/mets.xml clone:
 	ocrd -l DEBUG workspace -d $(WS) clone \
 		'https://content.staatsbibliothek-berlin.de/dc/PPN891267093.mets.xml' \
 		-q DEFAULT \
@@ -20,7 +20,7 @@ $(WS) clone:
 #
 # Sequential workflow w/o METS server
 #
-$(WS_SEQ)/mets.xml: $(WS)
+$(WS_SEQ)/mets.xml: $(WS)/mets.xml
 	cp -r $(WS) $(WS_SEQ)
 
 sequential: $(WS_SEQ)/mets.xml
@@ -44,7 +44,7 @@ stop-server: $(WS_PAR)/mets.xml
 rm-parallel: stop-server
 	rm -rf $(WS_PAR)
 
-$(WS_PAR)/mets.xml: $(WS)
+$(WS_PAR)/mets.xml: $(WS)/mets.xml
 	cp -r $(WS) $(WS_PAR)
 
 parallel-chunks: page_ranges = $(shell ocrd workspace -d $(WS_PAR) list-page -D $(NUMBER_OF_THREADS) -f comma-separated)
