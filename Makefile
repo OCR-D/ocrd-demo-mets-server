@@ -47,7 +47,7 @@ rm-parallel: stop-server
 $(WS_PAR)/mets.xml: $(WS)
 	cp -r $(WS) $(WS_PAR)
 
-parallel-chunks: page_ranges != ocrd workspace -d $(WS_PAR) list-page -D $(NUMBER_OF_THREADS) -f comma-separated
+parallel-chunks: page_ranges = $(shell ocrd workspace -d $(WS_PAR) list-page -D $(NUMBER_OF_THREADS) -f comma-separated)
 parallel-chunks: CLIPARAMS := -U $(SOCK) $(CLIPARAMS)
 parallel-chunks: $(WS_PAR)/mets.xml
 	cd $(WS_PAR) ; \
