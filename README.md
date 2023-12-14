@@ -59,3 +59,10 @@ Parallel chunks w/16 jobs (sanity check)
 /usr/bin/time make parallel-chunks NUMBER_OF_THREADS=16  252.13s user 11.21s system 734% cpu 35.850 total
 ```
 
+Parallel page-wise w/8 jobs
+
+```
+422.27user 53.79system 1:35.12elapsed 500%CPU (0avgtext+0avgdata 161360maxresident)k
+2616inputs+1305872outputs (11major+10164013minor)pagefaults 0swaps
+/usr/bin/time make parallel  422.28s user 53.79s system 500% cpu 1:35.13 total
+```
